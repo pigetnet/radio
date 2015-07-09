@@ -1,5 +1,5 @@
 #!/bin/bash
+. /opt/piget/core/install/extendPath
 message="$1"
 port=$(ps aux|grep "serialjson2php.py"|grep "radio"|awk {'print $17'})
 socketSend $port $message
-

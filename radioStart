@@ -1,1 +1,11 @@
 #!/bin/bash
+port=$(ps aux|grep "serialjson2php.py"|grep "radio"|awk {'print $17'})
+if [ -z "$port" ];then
+	echo "Radio open"
+	socketSend $port "stop"
+fi
+randport=$(python -S -c "import random; print random.randrange(9060, 9120)")
+echo $randport
+/usr/bin/python /opt/piget/kana/www/core/collectors/serialjson2php.py "/dev/ttyUSB0" 115200 "/opt/piget/kana/www/" "radio" $randport
+
+
