@@ -2,7 +2,7 @@
 port=$(ps aux|grep "serialjson2php.py"|grep "radio"|awk {'print $17'})
 if [ -z "$port" ];then
 	echo "Radio open"
-	socketSend $port "stop"
+	/net/socketSend $port "stop"
 fi
 randport=$(python -S -c "import random; print random.randrange(9060, 9120)")
 echo $randport
