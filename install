@@ -1,2 +1,12 @@
 #!/bin/bash
-
+/system/install supervisor
+cat <<\EOF > /etc/supervisor/conf.d/radio.conf
+[program:radio]
+command=/do/radio/check
+autostart=true
+autorestart=true
+stdout_logfile=/var/log/radio.log
+redirect_stderr=true
+EOF
+supervisorctl reread
+supervisorctl update

@@ -1,4 +1,4 @@
 #!/bin/bash
 message="$1"
-port=$(ps aux|grep "serialjson2php.py"|grep "radio"|awk {'print $17'})
+port=$(cat /do/radio/python/port)
 /net/socketSend $port $message
