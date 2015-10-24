@@ -2,12 +2,14 @@
 from lib import Socket
 from lib import PhpRequest
 from lib import Lock
+from lib import State
 import sys
 import time
 import os
 import serial
 import json
 import string
+
 
 """ Main Program """
 
@@ -33,6 +35,14 @@ serial_port = settings["port"]
 serial_speed = int(settings["speed"])
 
 Socket.Start(socket_port)
+
+
+"""
+State management
+"""
+
+codes, actions = State.getCodes()
+
 
 """
 Json (to move to JsonParser)
@@ -103,6 +113,9 @@ try:
                         Socket.Send(dataRaw)
                         data = False
                         print "SENDING-----"
+
+                    State.checkCodes(codes, dataRaw, actions)
+
 except KeyboardInterrupt:
     print "Closing Collector : Keyboard Interrupt"
     # server_socket.close()
