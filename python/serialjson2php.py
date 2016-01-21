@@ -60,14 +60,14 @@ def is_json(jsonLine):
 Serial
 """
 try:
-    ser = serial.Serial(serial_port, serial_speed, timeout=1)
+    arduino = serial.Serial(serial_port, serial_speed, timeout=1)
 except:
     print "Serial connection failed"
     print "speed:" + serial_speed
     print "port:" + serial_port
     os._exit(12)
 # Flush Buffer
-ser.flushInput()
+arduino.flushInput()
 
 print "Serial:"+str(serial_port)
 
@@ -75,7 +75,8 @@ try:
     while True:
         data = False
         try:
-                data = ser.readline().strip()
+                #
+                data = arduino.readline().strip()
                 message = Socket.Listen()
         # print message
         except:
@@ -85,7 +86,7 @@ try:
         if message is not False:
             # print "Founded something to tell to the arduino"
             # print message
-            ser.write(message + "\n")
+            arduino.write(message + "\n")
 
         if data:
             print data
@@ -119,5 +120,5 @@ try:
 except KeyboardInterrupt:
     print "Closing Collector : Keyboard Interrupt"
     # server_socket.close()
-    ser.close()
+    arduino.close()
     os._exit(13)
