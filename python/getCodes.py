@@ -45,9 +45,9 @@ def getCodes():
     codesList = list(set(codesList))
     return codesList, actionsDict
 
-#print codesList
-#print actionsDict["/radio/old/490614"]["id"]
-#print actionsDict
+# print codesList
+# print actionsDict["/radio/old/490614"]["id"]
+# print actionsDict
 codes, actions = getCodes()
 print codes
 print actions["/radio/new/10151594/1/off"][1]
